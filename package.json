@@ -1,7 +1,7 @@
 {
   "name": "practica4-desafio2",
   "version": "0.1.0",
-  "homepage": "https://elizabethgutierrez27.github.io/Practica4/",
+  "homepage": "https://elizabethgutierrez27.github.io/Practica4",
   "private": true,
   "dependencies": {
     "@testing-library/dom": "^10.4.0",
@@ -12,17 +12,19 @@
     "ajv-keywords": "^3.5.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-router-dom": "^7.6.2",
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
-  },
+  "start": "PORT=5173 react-scripts start",
+  "build": "react-scripts build",
+  "build:local": "cross-env PUBLIC_URL=/ react-scripts build",
+  "build:gh": "cross-env PUBLIC_URL=/Practica4/ react-scripts build",
+  "predeploy": "npm run build:gh",
+  "deploy": "gh-pages -d build"
+}
+,
   "eslintConfig": {
     "extends": [
       "react-app",
@@ -42,6 +44,7 @@
     ]
   },
   "devDependencies": {
+    "cross-env": "^7.0.3",
     "gh-pages": "^6.3.0"
   }
 }

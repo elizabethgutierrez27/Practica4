@@ -1,4 +1,4 @@
-name: Despliega
+name: Build and Deploy to GitHub Pages
 
 on:
   push:
@@ -6,26 +6,21 @@ on:
       - main
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
+      - name: Build Docker image
+        run: docker build -t my-app .
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Build the app
-        run: npm run build
+      - name: Run build inside container
+        run: docker run --rm my-app npm run build
 
       - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+        uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./build
